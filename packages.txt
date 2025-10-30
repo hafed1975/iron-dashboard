@@ -1,4 +1,4 @@
 coinor-libipopt-dev
-coinor-libmumps-dev
+libmumps-dev
 coinor-libcbc-dev
 coinor-libclp-dev
