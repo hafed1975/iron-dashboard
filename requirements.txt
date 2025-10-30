@@ -2,5 +2,6 @@ streamlit
 pandas
 pyomo
 folium
-cyipopt
 streamlit-folium
+cyipopt
+
