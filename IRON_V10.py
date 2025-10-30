@@ -221,7 +221,9 @@ def run_iron_model():
 
     # --- (5) تشغيل الحل (Solve) ---
     print("--- جارٍ حل نموذج الـ 600 شهر... ---")
-    solver = SolverFactory('ipopt')
+    # !! "الإصلاح الجراحي" (V10.1) - تحديد مسار المحرك يدوياً للسحابة !!
+    solver_executable_path = '/usr/bin/ipopt'
+    solver = SolverFactory('ipopt', executable=solver_executable_path)
     results = solver.solve(model, tee=False) 
     print("--- اكتمل الحل! ---")
 
@@ -431,4 +433,5 @@ with tab2:
             st.markdown(f"**الوارد الشهري (BCM)**")
             st.line_chart(filtered_df_indexed[inflow_var])
         else:
+
             st.info(f"ملاحظة: {selected_dam_name} ليس له وارد طبيعي مباشر في النموذج (يتم تغذيته من سد آخر أو بالتحويل).")
