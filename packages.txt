@@ -1,9 +1,1 @@
-build-essential
-gcc
-g++
-gfortran
-coinor-libipopt-dev
-libmumps-dev
-coinor-libcbc-dev
-coinor-libclp-dev
-pkg-config
+glpk-utils
