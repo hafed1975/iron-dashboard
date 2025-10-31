@@ -222,7 +222,7 @@ def run_iron_model():
     # --- (5) تشغيل الحل (Solve) ---
     print("--- جارٍ حل نموذج الـ 600 شهر... ---")
     # !! "الإصلاح السحابي" (V10.5) - استخدام "cyipopt" المدمج !!
-    solver = SolverFactory('ipopt')
+    solver = SolverFactory('glpk')
     results = solver.solve(model, tee=False) 
     print("--- اكتمل الحل! ---")
 
@@ -434,6 +434,7 @@ with tab2:
         else:
 
             st.info(f"ملاحظة: {selected_dam_name} ليس له وارد طبيعي مباشر في النموذج (يتم تغذيته من سد آخر أو بالتحويل).")
+
 
 
 
