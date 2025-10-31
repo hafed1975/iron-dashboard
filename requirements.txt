@@ -3,4 +3,3 @@ pandas
 pyomo
 folium
 streamlit-folium
-cyipopt
