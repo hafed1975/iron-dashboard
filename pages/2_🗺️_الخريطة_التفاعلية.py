@@ -17,7 +17,7 @@ if check_password():
 
     # --- (2) "إعداد" (Setup) "الخريطة" (Map) ---
     st.title("🗺️ الخريطة التفاعلية لأداء السدود")
-    st.write("انقر على أيقونة السد لرؤية النتائج الإحصائية للخزن والإطلاق.")
+    st.write("انقر على الدائرة الملونة لرؤية النتائج الإحصائية للخزن والإطلاق.")
 
     # (أ) "حساب" (Calculate) "الإحصائيات" (Stats) "المتوسطة" (Average)
     avg_stats = {}
@@ -52,7 +52,7 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # (د) "إضافة" (Add) "العلامات" (Markers) (مع "الأيقونات" (Icons) "المدمجة" (Built-in))
+    # (د) "إضافة" (Add) "العلامات" (Markers) (باستخدام "الدوائر" (Circles) "الآمنة" (Safe))
     for dam_name, (lat, lon) in dam_locations.items():
 
         stats = avg_stats.get(dam_name)
@@ -68,20 +68,20 @@ if check_password():
         if stats['inflow_var']:
              popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
 
-        # --- "التعديل" (EDIT) V10.37 (استخدام "الأيقونات" (Icons) "المدمجة" (Built-in) "الآمنة" (Safe)) ---
-        icon_name = 'tint' # "الاسم" (Name) "الخاص" (Special) "بـ" (by) "قطرة الماء" (Water drop) "في" (In) "مكتبة" (Library) Glyphicon
-        icon_color = 'blue'
-
+        # --- "التعديل" (EDIT) V10.38 (استخدام "الدوائر" (Circles) "بدلاً من" (Instead of) "الأيقونات" (Icons)) ---
+        dam_color = 'blue'
         if dam_name == 'منخفض الثرثار (Tharthar)':
-            icon_name = 'hdd' # "أيقونة" (Icon) "القرص الصلب" (Hard Drive) (ترمز "للخزن" (Storage))
-            icon_color = 'green'
+            dam_color = 'green'
 
-        folium.Marker(
+        folium.CircleMarker(
             location=[lat, lon],
+            radius=8, # "حجم" (Size) "الدائرة" (Circle)
             popup=folium.Popup(popup_html, max_width=300),
             tooltip=dam_name,
-            # "استخدام" (Use) 'glyphicon' "بدلاً من" (Instead of) 'fa'
-            icon=folium.Icon(color=icon_color, icon=icon_name, prefix='glyphicon') 
+            color=dam_color,
+            fill=True,
+            fill_color=dam_color,
+            fill_opacity=0.7
         ).add_to(m)
         # --- "نهاية" (End) "التعديل" (Edit) ---
 
