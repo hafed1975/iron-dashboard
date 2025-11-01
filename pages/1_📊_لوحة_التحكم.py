@@ -20,7 +20,7 @@ if check_password():
     # (أ) "عرض" (Display) "المؤشرات" (KPIs) "الرئيسية" (Main)
     st.sidebar.subheader("📊 مؤشرات الأداء (KPIs)")
 
-    # --- "الإصلاح" (FIX) V10.29 ---
+    # --- "الإصلاح" (FIX) V10.30 ---
     # "استخدام" (Use) "عناوين" (Labels) "إنجليزية" (English) "لتجنب" (Avoid) "الخطأ" (Error) `SyntaxError`
     st.sidebar.metric(
         label="System Reliability (%)",
@@ -67,7 +67,7 @@ if check_password():
         # (ب) "عرض" (Display) "البيانات" (Data) "الخام" (Raw)
         st.subheader("البيانات الخام (Raw Data)")
         # "إصلاح" (Fix) "التحذير" (Warning) "الخاص" (Special) "بـ" (by) `use_container_width`
-        st.dataframe(df[all_selected_vars].describe(), width='stretch') # (عرض "الإحصائيات" (Stats))
+        st.dataframe(df[all_selected_vars].describe(), width='stretch') # (عرض "الإحصائي" (Stats))
         st.dataframe(df[all_selected_vars], width='stretch') # (عرض "الجدول" (Table) "بالكامل" (Full))
 
     # (ج) "الشعار" (Logo) (في "الأسفل" (Bottom))
