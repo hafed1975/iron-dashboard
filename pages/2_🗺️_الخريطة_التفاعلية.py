@@ -5,21 +5,10 @@ import pandas as pd
 import folium 
 from streamlit_folium import st_folium 
 
-# --- "إضافة" (ADDITION) V10.36 (إصلاح "الأيقونات" (Icons)) ---
-# "هذا" (This) "يضمن" (Ensures) "تحميل" (Loading) "مكتبة" (Library) Font Awesome "بشكل صحيح" (Correctly)
-st.markdown(
-    """
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    """,
-    unsafe_allow_html=True
-)
-# --- "نهاية" (End) "الإضافة" (Addition) ---
-
-
 # "تحقق" (Check) من "كلمة المرور" (Password) "أولاً" (First)
 if check_password():
 
-    # --- (1) "تشغيل" (Run) "النموذج" (Model) (أو "الحصول" (Get) عليه من "الذاكرة" (Cache)) ---
+    # --- (1) "تشغيل" (Run) "النموذج" (Model) ---
     try:
         df, kpis = run_iron_model()
     except Exception as e:
@@ -30,7 +19,7 @@ if check_password():
     st.title("🗺️ الخريطة التفاعلية لأداء السدود")
     st.write("انقر على أيقونة السد لرؤية النتائج الإحصائية للخزن والإطلاق.")
 
-    # (أ) "حساب" (Calculate) "الإحصائيات" (Stats) "المتوسطة" (Average) (للنوافذ "المنبثقة" (Popup))
+    # (أ) "حساب" (Calculate) "الإحصائيات" (Stats) "المتوسطة" (Average)
     avg_stats = {}
     for dam_name, (storage_var, release_var, inflow_var) in dam_variable_mapping.items():
         avg_storage = df[storage_var].mean()
@@ -52,7 +41,7 @@ if check_password():
     # (ب) "إنشاء" (Create) "الخريطة" (Map) (متمركزة على العراق)
     m = folium.Map(location=[33.2232, 43.6793], zoom_start=6)
 
-    # (ج) "إضافة" (Add) "حدود" (Borders) "العراق" (Iraq) (المحافظات) "باللون" (In color) "الأسود" (Black)
+    # (ج) "إضافة" (Add) "حدود" (Borders) "العراق" (Iraq)
     try:
         borders_url = "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IRQ/ADM1/geoBoundaries-IRQ-ADM1.geojson"
         folium.GeoJson(
@@ -63,7 +52,7 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # (د) "إضافة" (Add) "العلامات" (Markers) (مع "الأيقونات" (Icons) "الجديدة" (New))
+    # (د) "إضافة" (Add) "العلامات" (Markers) (مع "الأيقونات" (Icons) "المدمجة" (Built-in))
     for dam_name, (lat, lon) in dam_locations.items():
 
         stats = avg_stats.get(dam_name)
@@ -79,19 +68,22 @@ if check_password():
         if stats['inflow_var']:
              popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
 
-        icon_name = 'tint' 
+        # --- "التعديل" (EDIT) V10.37 (استخدام "الأيقونات" (Icons) "المدمجة" (Built-in) "الآمنة" (Safe)) ---
+        icon_name = 'tint' # "الاسم" (Name) "الخاص" (Special) "بـ" (by) "قطرة الماء" (Water drop) "في" (In) "مكتبة" (Library) Glyphicon
         icon_color = 'blue'
 
         if dam_name == 'منخفض الثرثار (Tharthar)':
-            icon_name = 'database' 
+            icon_name = 'hdd' # "أيقونة" (Icon) "القرص الصلب" (Hard Drive) (ترمز "للخزن" (Storage))
             icon_color = 'green'
 
         folium.Marker(
             location=[lat, lon],
             popup=folium.Popup(popup_html, max_width=300),
             tooltip=dam_name,
-            icon=folium.Icon(color=icon_color, icon=icon_name, prefix='fa') 
+            # "استخدام" (Use) 'glyphicon' "بدلاً من" (Instead of) 'fa'
+            icon=folium.Icon(color=icon_color, icon=icon_name, prefix='glyphicon') 
         ).add_to(m)
+        # --- "نهاية" (End) "التعديل" (Edit) ---
 
     # (هـ) "عرض" (Render) "الخريطة" (Map) في "ستريملت" (Streamlit)
     st_folium(m, width='100%', height=600)
