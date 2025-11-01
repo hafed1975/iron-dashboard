@@ -21,10 +21,10 @@ if check_password():
 
     # --- (ج) "بدء" (Start) "التقرير الفني" (Technical Report) ---
 
-    st.title("تقرير فني: I.R.O.N (نظام التحسين الذكي للموارد المائية العراقية)")
+    st.title("I.R.O.N (نظام التحسين الذكي للموارد المائية العراقية)")
     st.subheader("منهجية تحسين (Optimization) مبتكرة لإدارة 50 عاماً من \"السيناريوهات العشوائية\" (Stochastic) للجفاف والفيضان")
 
-    st.write("**إعداد:** (اكتب اسمك هنا)")
+    st.write("**إعداد:** (الدكتور حافظ قاسم احمد الجبوري)")
     st.write("**التاريخ:** 30 أكتوبر 2025")
     st.write("---")
 
@@ -139,21 +139,21 @@ if check_password():
     st.write("""
     "التحليل" (Analysis) "في" (In) "صفحة" (Page) "لوحة التحكم" (Dashboard) "يثبت" (Proves) "نجاح" (Success) "النموذج" (Model) "في" (In) "إدارة" (Managing) "الفيضانات" (Floods) "العشوائية" (Random) "دون" (Without) "تجاوز" (Exceeding) "الحد" (Limit) "الحرج" (Critical) "لبغداد" (Baghdad).
     """)
-    st.info("ملاحظة: (الرجاء إدراج ملف IRON_V7_Plot_1_Baghdad_Flow.png هنا)")
+    
     # st.image("IRON_V7_Plot_1_Baghdad_Flow.png") # (ملف الصورة غير موجود حالياً)
 
     st.subheader("5.2. النتيجة الثانية: المرونة في إدارة الجفاف")
     st.write("""
     "الرسم البياني" (Plot) "للعجز" (Deficit) "يثبت" (Proves) "ذكاء" (Intelligence) "النموذج" (Model). "العجز" (Deficit) "لا" (Does not) "يظهر" (Appear) "إلا" (Except) "عندما" (When) "تكون" (Are) "الواردات" (Inflows) "في" (In) "أدنى" (Lowest) "مستوياتها" (Levels) (في "سنوات" (Years) "الجفاف" (Drought) "القاسية" (Severe)).
     """)
-    st.info("ملاحظة: (الرجاء إدراج ملف IRON_V7_Plot_2_Deficit_vs_Stress.png هنا)")
+    
     # st.image("IRON_V7_Plot_2_Deficit_vs_Stress.png") # (ملف الصورة غير موجود حالياً)
 
     st.subheader("5.3. النتيجة الثالثة: سياسة تقليل التبخر (الخزن الذكي)")
     st.write("""
     "الرسوم البيانية" (Plots) "للخزن" (Storage) "توضح" (Illustrate) "كيف" (How) "قرر" (Decided) "العقل" (I.R.O.N) "تخزين" (Store) "المياه" (Water) "ليقلل" (Reduce) "التبخر" (Evaporation) (عن "طريق" (Way) "تفضيل" (Preferring) "الخزانات" (Reservoirs) "العميقة" (Deep) "على" (Over) "الضحلة" (Shallow)).
     """)
-    st.info("ملاحظة: (الرجاء إدج ملف IRON_V7_Plot_3_Storage_Policy.png هنا)")
+    
     # st.image("IRON_V7_Plot_3_Storage_Policy.png") # (ملف الصورة غير موجود حالياً)
 
     # --- 6. ملخص النتائج ---
