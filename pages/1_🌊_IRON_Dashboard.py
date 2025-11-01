@@ -1,3 +1,8 @@
+import streamlit as st
+from password_check import check_password
+
+# "تحقق" (Check) من "كلمة المرور" (Password) "أولاً" (First)
+if check_password():
 # ----------------------------------------------------------------------
 # "العقل" (I.R.O.N) - الإصدار 10.0 (بايثون)
 # "لوحة التحكم التفاعلية الاحترافية" (The Professional Decision Tool)
@@ -435,6 +440,7 @@ with tab2:
         else:
 
             st.info(f"ملاحظة: {selected_dam_name} ليس له وارد طبيعي مباشر في النموذج (يتم تغذيته من سد آخر أو بالتحويل).")
+
 
 
 
