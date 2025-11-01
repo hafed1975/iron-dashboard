@@ -41,7 +41,7 @@ if check_password():
     # (ب) "إنشاء" (Create) "الخريطة" (Map) (متمركزة على العراق)
     m = folium.Map(location=[33.2232, 43.6793], zoom_start=6)
 
-    # (ج) "إضافة" (Add) "حدود" (Borders) "العراق" (Iraq)
+    # (ج) "إضافة" (Add) "حدود" (Borders) "العراق" (Iraq) (هذا "يعمل" (works) "بشكل جيد" (well))
     try:
         borders_url = "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IRQ/ADM1/geoBoundaries-IRQ-ADM1.geojson"
         folium.GeoJson(
@@ -52,9 +52,12 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (Link) "جديد" (New) "نظيف" (Clean))
+    # --- "التعديل" (EDIT) V10.53 ---
+
+    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (link) "خارجي" (external) "موثوق" (trusted))
     try:
-        rivers_url = "https://gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/iraq_rivers_cleaned.geojson"
+        # "هذا" (This) "هو" (is) "الرابط" (the link) "الصحيح" (correct) "والنظيف" (and clean) "للأنهار" (for the rivers)
+        rivers_url = "https://gist.githubusercontent.com/Dans-Log/9536340/raw/81b2f0036ac76395b0b6c62b489e37fa86747b63/Iraq%2520Major%2520Rivers.geojson"
         folium.GeoJson(
             rivers_url,
             name="Rivers",
@@ -63,15 +66,13 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الأنهار. الخطأ: {e}")
 
-    # --- "التعديل" (EDIT) V10.50 (استخدام "الأيقونة" (Icon) "المحلية" (Local) "الخاصة" (Special) "بك" (your)) ---
-
-    # (هـ) "إضافة" (Add) "العلامات" (Markers)
+    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local) "الذي" (that) "رفعته" (you uploaded))
     try:
-        # "هنا" (Here) "نحن" (we) "نستدعي" (call) "الملف" (the file) "الذي" (that) "قمت" (you did) "برفعه" (uploading it)
+        # "هنا" (Here) "نحن" (we) "نستدعي" (call) "الأيقونة" (the icon) `images.png` "التي" (that) "رفعتها" (you uploaded) "أنت" (you)
         icon_path = 'images.png' 
         icon = folium.CustomIcon(
             icon_path,
-            icon_size=(30, 30) # "الحجم" (Size) 30x30 "بيكسل" (Pixels)
+            icon_size=(30, 30) 
         )
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل 'images.png'. هل قمت برفعه إلى GitHub؟ سنستخدم الدائرة الافتراضية. الخطأ: {e}")
@@ -102,7 +103,7 @@ if check_password():
                 icon=icon # "تطبيق" (Apply) "الأيقونة" (the icon) "الخاصة" (special) "بك" (your)
             ).add_to(m)
         else:
-            # "الخطة" (Plan) "الاحتياطية" (Backup) "إذا" (if) "فشل" (failed) "الرفع" (upload)
+            # "الخطة" (Plan) "الاحتياطية" (Backup)
             folium.CircleMarker(
                 location=[lat, lon],
                 radius=8, 
