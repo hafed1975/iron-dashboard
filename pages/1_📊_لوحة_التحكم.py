@@ -45,7 +45,7 @@ if check_password():
     selected_storage = st.sidebar.multiselect("اختر الخزن (Storage)", storage_vars)
     selected_releases = st.sidebar.multiselect("اختر الإطلاقات (Releases)", release_vars)
     selected_inflows = st.sidebar.multiselect("اختر الواردات (Inflows)", inflow_vars)
-    selected_shortage = st.sidebar.multiselect("اختر العجز (Shortage)", shortage_vars, default=shortage_vars) # (العجز "مفعل" (Default) "دائماً" (Always))
+    selected_shortage = st.sidebar.multiselect("اختر العجز (Shortage)", shortage_vars, default=shortage_vars)
 
     # "دمج" (Combine) "الاختيارات" (Selections)
     all_selected_vars = selected_storage + selected_releases + selected_inflows + selected_shortage
@@ -62,8 +62,9 @@ if check_password():
 
         # (ب) "عرض" (Display) "البيانات" (Data) "الخام" (Raw)
         st.subheader("البيانات الخام (Raw Data)")
-        st.dataframe(df[all_selected_vars].describe(), use_container_width=True) # (عرض "الإحصائيات" (Stats))
-        st.dataframe(df[all_selected_vars], use_container_width=True) # (عرض "الجدول" (Table) "بالكامل" (Full))
+        # "إصلاح" (Fix) "التحذير" (Warning) "الخاص" (Special) "بـ" (by) `use_container_width`
+        st.dataframe(df[all_selected_vars].describe(), width='stretch') # (عرض "الإحصائيات" (Stats))
+        st.dataframe(df[all_selected_vars], width='stretch') # (عرض "الجدول" (Table) "بالكامل" (Full))
 
     # (ج) "الشعار" (Logo) (في "الأسفل" (Bottom))
     try:
