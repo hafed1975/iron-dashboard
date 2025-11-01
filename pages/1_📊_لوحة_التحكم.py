@@ -17,10 +17,10 @@ if check_password():
     st.sidebar.header("خيارات العرض (V10)")
     st.sidebar.subheader("📊 مؤشرات الأداء (KPIs)")
 
-    # --- "الإصلاح" (FIX) V10.31 (Safe Version) ---
-    # "فصل" (Separate) "الجمل" (Strings) "عن" (From) "الدوال" (Functions) "لتجنب" (Avoid) "الأخطاء" (Errors)
+    # --- "الإصلاح" (FIX) V10.32 (The "%%" Fix) ---
     label_1 = "System Reliability (%)"
-    value_1 = f"{kpis['Reliability (% Months without Shortage)]:.2f} %"
+    # "أضفنا" (We added) "%%" "في" (In) "النهاية" (End) "لإصلاح" (To fix) "الخطأ" (Error)
+    value_1 = f"{kpis['Reliability (% Months without Shortage)]:.2f} %%" 
     st.sidebar.metric(label=label_1, value=value_1)
 
     label_2 = "Total Shortage (Baghdad BCM)"
