@@ -13,12 +13,12 @@ if check_password():
         # "تشغيل" (Run) "الدالة" (Function) "المشتركة" (Shared) من `model_logic.py`
         df, kpis = run_iron_model()
     except Exception as e:
-        st.error(f"حدث خطأ " + "أثناء" + " تشغيل " + "النموذج" + " (run_iron_model): {e}")
+        st.error(f"حدث خطأ أثناء تشغيل النموذج (run_iron_model): {e}")
         st.stop()
 
     # --- (2) "إعداد" (Setup) "الخريطة" (Map) ---
-    st.title("🗺️ " + "الخريطة" + " " + "التفاعلية" + " " + "لأداء" + " " + "السدود" + "")
-    st.write("انقر (Click) على " + "أيقونة" + " " + "السد" + " " + "لرؤية" + " " + "النتائج" + " " + "الإحصائية" + " " + "للخزن" + " " + "والإطلاق" + ".")
+    st.title("🗺️ الخريطة التفاعلية لأداء السدود")
+    st.write("انقر (Click) على أيقونة السد لرؤية النتائج الإحصائية للخزن والإطلاق.")
 
     # (أ) "حساب" (Calculate) "الإحصائيات" (Stats) "المتوسطة" (Average) (للنوافذ "المنبثقة" (Popup))
     avg_stats = {}
@@ -55,11 +55,11 @@ if check_password():
         popup_html = f"""
         <b>{dam_name}</b><br>
         <hr>
-        <b>متوسط "الخزن" ({stats['storage_var']}):</b> {stats['avg_storage']:.2f} BCM<br>
-        <b>متوسط "الإطلاق" ({stats['release_var']}):</b> {stats['avg_release']:.2f} BCM<br>
+        <b>متوسط الخزن ({stats['storage_var']}):</b> {stats['avg_storage']:.2f} BCM<br>
+        <b>متوسط الإطلاق ({stats['release_var']}):</b> {stats['avg_release']:.2f} BCM<br>
         """
         if stats['inflow_var']:
-             popup_html += f"<b>متوسط " + "الوارد" + " ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
+             popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
 
         # "إضافة" (Add) "العلامة" (Marker) (بالأيقونة "الافتراضية" (Default) "الحالية" (Current))
         folium.Marker(
@@ -76,4 +76,4 @@ if check_password():
     try:
         st.image("../logo.jpg", width=200) # (ملاحظة: المسار `../` "ضروري" (Necessary))
     except Exception as e:
-        st.warning("لم " + "يتم" + " " + "العثور" + " " + "على" + " " + "الشعار" + " (logo.jpg)")
+        st.warning("لم يتم العثور على الشعار (logo.jpg)")
