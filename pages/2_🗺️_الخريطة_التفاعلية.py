@@ -35,7 +35,7 @@ if check_password():
             "release_var": release_var,
             "avg_release": avg_release,
             "inflow_var": inflow_var,
-            "avg_inflow": avg_inflow
+            "avg_inflow": avg_inflow # "الاسم" (Name) "الصحيح" (Correct) "هو" (Is) `avg_inflow`
         }
 
     # (ب) "إنشاء" (Create) "الخريطة" (Map) (متمركزة على العراق)
@@ -52,32 +52,27 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # --- "الإضافة" (ADDITION) V10.43 (إضافة "الأنهار" (Rivers) "من" (From) "رابط" (Link) "خام" (Raw)) ---
+    # (د) "إضافة" (Add) "الأنهار" (Rivers)
     try:
-        # "هذا" (This) "هو" (Is) "الرابط" (Link) "الصحيح" (Correct) "الذي" (That) "وجدته" (I found) "لك" (you)
         rivers_url = "https://gist.githubusercontent.com/Dans-Log/9536340/raw/81b2f0036ac76395b0b6c62b489e37fa86747b63/Iraq%2520Major%2520Rivers.geojson"
         folium.GeoJson(
             rivers_url,
             name="Rivers",
-            style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} # "اللون" (Color) "الأزرق" (Blue) "وسمك" (Thickness) 2
+            style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} 
         ).add_to(m)
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الأنهار. الخطأ: {e}")
-    # --- "نهاية" (End) "الإضافة" (Addition) ---
 
-    # (د) "إضافة" (Add) "العلامات" (Markers) (باستخدام "الأيقونات" (Icons) "المخصصة" (Custom))
-
-    # "تعريف" (Define) "الأيقونة" (Icon) "المخصصة" (Custom) "الجديدة" (New)
+    # (هـ) "إضافة" (Add) "العلامات" (Markers)
     try:
-        # "هذا" (This) "هو" (Is) "الرابط" (Link) "الصحيح" (Correct) "للأيقونة" (Icon) "التي" (That) "طلبتها" (You requested)
         icon_url = "https://raw.githubusercontent.com/Gemini-Helper-Account/IRON-Files/main/dam_icon.png"
         icon = folium.CustomIcon(
             icon_url,
-            icon_size=(30, 30) # "الحجم" (Size) 30x30 "بيكسل" (Pixels)
+            icon_size=(30, 30) 
         )
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل أيقونة السد. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
-        icon = None # "خطة" (Plan) "احتياطية" (Backup)
+        icon = None 
 
     for dam_name, (lat, lon) in dam_locations.items():
 
@@ -91,19 +86,21 @@ if check_password():
         <b>متوسط الخزن ({stats['storage_var']}):</b> {stats['avg_storage']:.2f} BCM<br>
         <b>متوسط الإطلاق ({stats['release_var']}):</b> {stats['avg_release']:.2f} BCM<br>
         """
-        if stats['inflow_var']:
-             popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_info']:.2f} BCM"
 
-        # --- "التعديل" (EDIT) V10.43 (استخدام "الأيقونة" (Icon) "المخصصة" (Custom) "إذا" (If) "نجحت" (Succeeded)) ---
+        # --- "الإصلاح" (FIX) V10.44 ---
+        if stats['inflow_var']:
+             # "تم" (Done) "تغيير" (Changing) `avg_info` "إلى" (To) `avg_inflow`
+             popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
+        # --- "نهاية" (End) "الإصلاح" (Fix) ---
+
         if icon:
             folium.Marker(
                 location=[lat, lon],
                 popup=folium.Popup(popup_html, max_width=300),
                 tooltip=dam_name,
-                icon=icon # "استخدام" (Use) "الأيقونة" (Icon) "الجديدة" (New) "من" (From) "الرابط" (Link) "الخام" (Raw)
+                icon=icon 
             ).add_to(m)
         else:
-            # "الخطة" (Plan) "الاحتياطية" (Backup) (الدوائر (Circles)) "إذا" (If) "فشل" (Failed) "تحميل" (Load) "الأيقونة" (Icon)
             folium.CircleMarker(
                 location=[lat, lon],
                 radius=8, 
@@ -114,12 +111,11 @@ if check_password():
                 fill_color='blue',
                 fill_opacity=0.7
             ).add_to(m)
-        # --- "نهاية" (End) "التعديل" (Edit) ---
 
-    # (هـ) "عرض" (Render) "الخريطة" (Map) في "ستريملت" (Streamlit)
+    # (و) "عرض" (Render) "الخريطة" (Map) في "ستريملت" (Streamlit)
     st_folium(m, width='100%', height=600)
 
-    # (و) "الشعار" (Logo) (في "الأسفل" (Bottom))
+    # (ز) "الشعار" (Logo) (في "الأسفل" (Bottom))
     try:
         st.image("../logo.jpg", width=200) 
     except Exception as e:
