@@ -17,18 +17,20 @@ if check_password():
     st.sidebar.header("خيارات العرض (V10)")
     st.sidebar.subheader("📊 مؤشرات الأداء (KPIs)")
 
-    # --- "الإصلاح" (FIX) V10.32 (The "%%" Fix) ---
+    # --- "الإصلاح" (FIX) V10.33 ---
+    # "استخدام" (Use) "المفاتيح" (Keys) "الآمنة" (Safe) "الجديدة" (New) "من" (From) `model_logic.py`
     label_1 = "System Reliability (%)"
-    # "أضفنا" (We added) "%%" "في" (In) "النهاية" (End) "لإصلاح" (To fix) "الخطأ" (Error)
-    value_1 = f"{kpis['Reliability (% Months without Shortage)]:.2f} %%" 
+    # "لاحظ" (Note): "الآن" (Now) "نستخدم" (We use) "المفتاح" (Key) "الآمن" (Safe) "reliability_percent"
+    # "و" (And) "علامة" (Sign) "%" "واحدة" (Single) "في" (In) "النهاية" (End) "تعمل" (Works) "بشكل صحيح" (Correctly)
+    value_1 = f"{kpis['reliability_percent']:.2f} %" 
     st.sidebar.metric(label=label_1, value=value_1)
 
     label_2 = "Total Shortage (Baghdad BCM)"
-    value_2 = f"{kpis['Total Shortage Baghdad (BCM)]:.2f} BCM"
+    value_2 = f"{kpis['shortage_bag']:.2f} BCM"
     st.sidebar.metric(label=label_2, value=value_2)
 
     label_3 = "Total Shortage (Euphrates BCM)"
-    value_3 = f"{kpis['Total Shortage Euphrates (BCM)]:.2f} BCM"
+    value_3 = f"{kpis['shortage_euph']:.2f} BCM"
     st.sidebar.metric(label=label_3, value=value_3)
     # --- "نهاية" (End) "الإصلاح" (Fix) ---
 
