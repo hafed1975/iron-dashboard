@@ -52,9 +52,12 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (Link) "جديد" (New) "نظيف" (Clean))
+    # --- "التعديل" (EDIT) V10.49 (إضافة "الـ" (the) `https://` "المفقودة" (Missing)) ---
+
+    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (Link) "نظيف" (Clean))
     try:
-        rivers_url = "https.gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/iraq_rivers_cleaned.geojson"
+        # "تمت" (Done) "إضافة" (add) `https://` "إلى" (to) "البداية" (the beginning)
+        rivers_url = "https://gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/iraq_rivers_cleaned.geojson"
         folium.GeoJson(
             rivers_url,
             name="Rivers",
@@ -65,7 +68,8 @@ if check_password():
 
     # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "رابط" (Link) "أيقونة" (Icon) "نظيف" (Clean))
     try:
-        icon_url = "https.gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/dam_icon_blue.png"
+        # "تمت" (Done) "إضافة" (add) `https://` "إلى" (to) "البداية" (the beginning)
+        icon_url = "https://gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/dam_icon_blue.png"
         icon = folium.CustomIcon(
             icon_url,
             icon_size=(30, 30) 
@@ -73,6 +77,7 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل أيقونة السد. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
         icon = None 
+    # --- "نهاية" (End) "التعديل" (Edit) ---
 
     for dam_name, (lat, lon) in dam_locations.items():
 
@@ -87,11 +92,8 @@ if check_password():
         <b>متوسط الإطلاق ({stats['release_var']}):</b> {stats['avg_release']:.2f} BCM<br>
         """
 
-        # --- "الإصلاح" (FIX) V10.48 (إصلاح "الخطأ الإملائي" (Typo)) ---
         if stats['inflow_var']:
-             # "استخدام" (Use) `avg_inflow` "بدلاً من" (Instead of) `avg_info`
              popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
-        # --- "نهاية" (End) "الإصلاح" (Fix) ---
 
         if icon:
             folium.Marker(
