@@ -17,18 +17,19 @@ if check_password():
     st.sidebar.header("خيارات العرض (V10)")
     st.sidebar.subheader("📊 مؤشرات الأداء (KPIs)")
 
-    # (أ) "عرض" (Display) "المؤشرات" (KPIs) "الرئيسية" (Main)
+    # --- "الإصلاح" (FIX) V10.48 (استخدام "المفاتيح" (Keys) "الآمنة" (Safe)) ---
     label_1 = "System Reliability (%)"
-    value_1 = f"{kpis['reliability_percent']:.2f} %" # (تم "إصلاح" (Fixed) "الخطأ" (Error) `%%` "في" (In) V10.33)
+    value_1 = f"{kpis['reliability_percent']:.2f} %" # "استخدام" (Use) "المفتاح" (Key) "الآمن" (Safe)
     st.sidebar.metric(label=label_1, value=value_1)
 
     label_2 = "Total Shortage (Baghdad BCM)"
-    value_2 = f"{kpis['shortage_bag']:.2f} BCM"
+    value_2 = f"{kpis['shortage_bag']:.2f} BCM" # "استخدام" (Use) "المفتاح" (Key) "الآمن" (Safe)
     st.sidebar.metric(label=label_2, value=value_2)
 
     label_3 = "Total Shortage (Euphrates BCM)"
-    value_3 = f"{kpis['shortage_euph']:.2f} BCM"
+    value_3 = f"{kpis['shortage_euph']:.2f} BCM" # "استخدام" (Use) "المفتاح" (Key) "الآمن" (Safe)
     st.sidebar.metric(label=label_3, value=value_3)
+    # --- "نهاية" (End) "الإصلاح" (Fix) ---
 
     # (ب) "اختيار" (Select) "المتغيرات" (Variables) "للرسم" (Plotting)
     st.sidebar.subheader("📈 اختر المتغيرات للرسم")
@@ -48,38 +49,26 @@ if check_password():
     # --- (3) "لوحة التحكم" (Dashboard) "الرئيسية" (Main) ---
     st.title("📊 لوحة تحكم النتائج (I.R.O.N)")
 
-    # --- "الإضافة" (ADDITION) V10.34 ---
-    # "إضافة" (Add) "شريط" (Slider) "الزمن" (Time) "لتصفية" (Filter) "البيانات" (Data)
+    # "إضافة" (Add) "شريط" (Slider) "الزمن" (Time) (V10.34)
     st.subheader("1. اختر النطاق الزمني (الأشهر)")
-
-    # "الشريط" (Slider) "سيعمل" (Will work) "من" (From) "الشهر" (Month) 1 "إلى" (To) 600
     selected_range = st.slider(
         "اختر نطاق الأشهر (من 1 إلى 600):",
         min_value=1,
         max_value=600,
-        value=(1, 600) # "الافتراضي" (Default) "هو" (Is) "عرض" (Display) "كل" (All) "الـ" (the) 600 "شهر" (Months)
+        value=(1, 600) 
     )
     start_month, end_month = selected_range
-
-    # "تحويل" (Convert) "قيم" (Values) "الشريط" (Slider) (1-600) "إلى" (To) "فهرس" (Index) "الجدول" (DataFrame) (0-599)
     start_index = start_month - 1
-    end_index = end_month - 1 # "لا" (No) "نحتاج" (Need) "+1" "هنا" (Here) "لأن" (Because) "الفهرس" (Index) "يبدأ" (Starts) "من" (From) 0
-
-    # "تصفية" (Filter) "الجدول" (DataFrame) "الرئيسي" (Main)
-    df_filtered = df.iloc[start_index:end_index] # "استخدام" (Use) "الجدول" (DataFrame) "المصفى" (Filtered) "للأسفل" (Below)
-    # --- "نهاية" (End) "الإضافة" (Addition) ---
+    end_index = end_month - 1
+    df_filtered = df.iloc[start_index:end_index] 
 
     if not all_selected_vars:
         st.info("يرجى اختيار متغير واحد على الأقل من الشريط الجانبي لعرضه.")
     else:
-        # (أ) "الرسم" (Plot) "البياني" (Chart) "الزمني" (Time-series)
         st.subheader(f"2. النتائج الشهرية (من شهر {start_month} إلى {end_month})")
-        # "استخدام" (Use) "الجدول" (DataFrame) "المصفى" (Filtered) "هنا" (Here)
         st.line_chart(df_filtered[all_selected_vars])
 
-        # (ب) "عرض" (Display) "البيانات" (Data) "الخام" (Raw)
         st.subheader(f"3. البيانات الخام للنطاق المختار")
-        # "استخدام" (Use) "الجدول" (DataFrame) "المصفى" (Filtered) "هنا" (Here) "أيضاً" (Also)
         st.dataframe(df_filtered[all_selected_vars].describe(), width='stretch') 
         st.dataframe(df_filtered[all_selected_vars], width='stretch')
 
