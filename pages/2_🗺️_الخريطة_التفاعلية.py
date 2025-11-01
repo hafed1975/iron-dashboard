@@ -52,11 +52,8 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # --- "التعديل" (EDIT) V10.49 (إضافة "الـ" (the) `https://` "المفقودة" (Missing)) ---
-
-    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (Link) "نظيف" (Clean))
+    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (Link) "جديد" (New) "نظيف" (Clean))
     try:
-        # "تمت" (Done) "إضافة" (add) `https://` "إلى" (to) "البداية" (the beginning)
         rivers_url = "https://gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/iraq_rivers_cleaned.geojson"
         folium.GeoJson(
             rivers_url,
@@ -66,16 +63,18 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الأنهار. الخطأ: {e}")
 
-    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "رابط" (Link) "أيقونة" (Icon) "نظيف" (Clean))
+    # --- "التعديل" (EDIT) V10.50 (استخدام "الأيقونة" (Icon) "المحلية" (Local) "الخاصة" (Special) "بك" (your)) ---
+
+    # (هـ) "إضافة" (Add) "العلامات" (Markers)
     try:
-        # "تمت" (Done) "إضافة" (add) `https://` "إلى" (to) "البداية" (the beginning)
-        icon_url = "https://gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/dam_icon_blue.png"
+        # "هنا" (Here) "نحن" (we) "نستدعي" (call) "الملف" (the file) "الذي" (that) "قمت" (you did) "برفعه" (uploading it)
+        icon_path = 'images.png' 
         icon = folium.CustomIcon(
-            icon_url,
-            icon_size=(30, 30) 
+            icon_path,
+            icon_size=(30, 30) # "الحجم" (Size) 30x30 "بيكسل" (Pixels)
         )
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل أيقونة السد. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل 'images.png'. هل قمت برفعه إلى GitHub؟ سنستخدم الدائرة الافتراضية. الخطأ: {e}")
         icon = None 
     # --- "نهاية" (End) "التعديل" (Edit) ---
 
@@ -100,9 +99,10 @@ if check_password():
                 location=[lat, lon],
                 popup=folium.Popup(popup_html, max_width=300),
                 tooltip=dam_name,
-                icon=icon 
+                icon=icon # "تطبيق" (Apply) "الأيقونة" (the icon) "الخاصة" (special) "بك" (your)
             ).add_to(m)
         else:
+            # "الخطة" (Plan) "الاحتياطية" (Backup) "إذا" (if) "فشل" (failed) "الرفع" (upload)
             folium.CircleMarker(
                 location=[lat, lon],
                 radius=8, 
