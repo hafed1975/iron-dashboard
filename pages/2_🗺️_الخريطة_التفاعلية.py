@@ -19,7 +19,7 @@ if check_password():
     st.title("🗺️ الخريطة التفاعلية لأداء السدود")
     st.write("انقر على الدائرة الملونة لرؤية النتائج الإحصائية للخزن والإطلاق.")
 
-    # (أ) "حساب" (Calculate) "الإحصائيات" (Stats) "المتوسطة" (Average)
+    # (أ) "حساب" (Calculate) "الإحصائي" (Stats) "المتوسط" (Average)
     avg_stats = {}
     for dam_name, (storage_var, release_var, inflow_var) in dam_variable_mapping.items():
         avg_storage = df[storage_var].mean()
@@ -52,6 +52,19 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
+    # --- "الإضافة" (ADDITION) V10.40 (إضافة "الأنهار" (Rivers)) ---
+    try:
+        # "هذا" (This) "ملف" (File) "عالمي" (Global)، "لذلك" (So) "هو" (It) "كبير" (Big) "وقد" (And may) "يستغرق" (Take) "وقتاً" (Time) "للتحميل" (Load)
+        rivers_url = "https://github.com/martynafford/natural-earth-geojson/raw/master/110m/physical/ne_110m_rivers_lake_centerlines.geojson"
+        folium.GeoJson(
+            rivers_url,
+            name="Rivers",
+            style_function=lambda x: {'color': '#007BFF', 'weight': 1.5} # "اللون" (Color) "الأزرق" (Blue) "الساطع" (Bright)
+        ).add_to(m)
+    except Exception as e:
+        st.warning(f"لم نتمكن من تحميل طبقة الأنهار. الخطأ: {e}")
+    # --- "نهاية" (End) "الإضافة" (Addition) ---
+
     # (د) "إضافة" (Add) "العلامات" (Markers) (باستخدام "الدوائر" (Circles) "الآمنة" (Safe))
     for dam_name, (lat, lon) in dam_locations.items():
 
@@ -68,14 +81,13 @@ if check_password():
         if stats['inflow_var']:
              popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
 
-        # --- "التعديل" (EDIT) V10.38 (استخدام "الدوائر" (Circles) "بدلاً من" (Instead of) "الأيقونات" (Icons)) ---
         dam_color = 'blue'
         if dam_name == 'منخفض الثرثار (Tharthar)':
             dam_color = 'green'
 
         folium.CircleMarker(
             location=[lat, lon],
-            radius=8, # "حجم" (Size) "الدائرة" (Circle)
+            radius=8, 
             popup=folium.Popup(popup_html, max_width=300),
             tooltip=dam_name,
             color=dam_color,
@@ -83,7 +95,6 @@ if check_password():
             fill_color=dam_color,
             fill_opacity=0.7
         ).add_to(m)
-        # --- "نهاية" (End) "التعديل" (Edit) ---
 
     # (هـ) "عرض" (Render) "الخريطة" (Map) في "ستريملت" (Streamlit)
     st_folium(m, width='100%', height=600)
