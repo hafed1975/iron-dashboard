@@ -290,7 +290,8 @@ with st.sidebar:
     
     # (إصلاح تحذير الشعار)
     try:
-        st.image("logo.jpg", width='stretch') 
+    # --- (7) عرض الشعار (Logo) ---
+    st.image("../logo.jpg", width='stretch') 
     except:
         st.error("لم يتم العثور على ملف الشعار 'logo.jpg'")
         
@@ -434,6 +435,7 @@ with tab2:
         else:
 
             st.info(f"ملاحظة: {selected_dam_name} ليس له وارد طبيعي مباشر في النموذج (يتم تغذيته من سد آخر أو بالتحويل).")
+
 
 
 
