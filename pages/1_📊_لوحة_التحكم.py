@@ -19,18 +19,22 @@ if check_password():
 
     # (أ) "عرض" (Display) "المؤشرات" (KPIs) "الرئيسية" (Main)
     st.sidebar.subheader("📊 مؤشرات الأداء (KPIs)")
+
+    # --- "الإصلاح" (FIX) V10.29 ---
+    # "استخدام" (Use) "عناوين" (Labels) "إنجليزية" (English) "لتجنب" (Avoid) "الخطأ" (Error) `SyntaxError`
     st.sidebar.metric(
-        label="موثوقية النظام (أشهر بدون عجز)",
+        label="System Reliability (%)",
         value=f"{kpis['Reliability (% Months without Shortage)]:.2f} %"
     )
     st.sidebar.metric(
-        label="إجمالي العجز (بغداد)",
+        label="Total Shortage (Baghdad BCM)",
         value=f"{kpis['Total Shortage Baghdad (BCM)]:.2f} BCM"
     )
     st.sidebar.metric(
-        label="إجمالي العجز (الفرات)",
+        label="Total Shortage (Euphrates BCM)",
         value=f"{kpis['Total Shortage Euphrates (BCM)]:.2f} BCM"
     )
+    # --- "نهاية" (End) "الإصلاح" (Fix) ---
 
     # (ب) "اختيار" (Select) "المتغيرات" (Variables) "للرسم" (Plotting)
     st.sidebar.subheader("📈 اختر المتغيرات للرسم")
