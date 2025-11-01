@@ -52,22 +52,20 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # --- "التعديل" (EDIT) V10.47 (استخدام "روابط" (Links) "جديدة" (New) "وآمنة" (Safe)) ---
-
-    # (1) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (Link) "جديد" (New) "غير تالف" (Not corrupted))
+    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (Link) "جديد" (New) "نظيف" (Clean))
     try:
-        rivers_url = "https://gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/iraq_rivers_cleaned.geojson"
+        rivers_url = "https.gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/iraq_rivers_cleaned.geojson"
         folium.GeoJson(
             rivers_url,
             name="Rivers",
-            style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} # "اللون" (Color) "الأزرق" (Blue) "وسمك" (Thickness) 2
+            style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} 
         ).add_to(m)
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الأنهار. الخطأ: {e}")
 
-    # (2) "إضافة" (Add) "الأيقونات" (Icons) (من "رابط" (Link) "الأيقونة" (Icon) "الزرقاء" (Blue) "الجديدة" (New))
+    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "رابط" (Link) "أيقونة" (Icon) "نظيف" (Clean))
     try:
-        icon_url = "https://gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/dam_icon_blue.png"
+        icon_url = "https.gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/dam_icon_blue.png"
         icon = folium.CustomIcon(
             icon_url,
             icon_size=(30, 30) 
@@ -75,7 +73,6 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل أيقونة السد. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
         icon = None 
-    # --- "نهاية" (End) "التعديل" (Edit) ---
 
     for dam_name, (lat, lon) in dam_locations.items():
 
@@ -90,11 +87,13 @@ if check_password():
         <b>متوسط الإطلاق ({stats['release_var']}):</b> {stats['avg_release']:.2f} BCM<br>
         """
 
+        # --- "الإصلاح" (FIX) V10.48 (إصلاح "الخطأ الإملائي" (Typo)) ---
         if stats['inflow_var']:
+             # "استخدام" (Use) `avg_inflow` "بدلاً من" (Instead of) `avg_info`
              popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
+        # --- "نهاية" (End) "الإصلاح" (Fix) ---
 
         if icon:
-            # "تطبيق" (Apply) "الأيقونة" (Icon) "الجديدة" (New)
             folium.Marker(
                 location=[lat, lon],
                 popup=folium.Popup(popup_html, max_width=300),
@@ -102,7 +101,6 @@ if check_password():
                 icon=icon 
             ).add_to(m)
         else:
-            # "الخطة" (Plan) "الاحتياطية" (Backup)
             folium.CircleMarker(
                 location=[lat, lon],
                 radius=8, 
@@ -117,7 +115,7 @@ if check_password():
     # (و) "عرض" (Render) "الخريطة" (Map) في "ستريملت" (Streamlit)
     st_folium(m, width='100%', height=600)
 
-    # (ز) "الشعار" (Logo) (في "الأسفل" (Bottom))
+    # (ز) "الشعار" (Logo) (في "أسفل" (Bottom))
     try:
         st.image("../logo.jpg", width=200) 
     except Exception as e:
