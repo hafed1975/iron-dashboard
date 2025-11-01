@@ -26,7 +26,6 @@ if check_password():
         avg_storage = df[storage_var].mean()
         avg_release = df[release_var].mean()
 
-        # (التعامل "بأمان" (Safely) مع "الواردات" (Inflows) (التي قد تكون `None`))
         avg_inflow = 0
         if inflow_var and inflow_var in df.columns:
             avg_inflow = df[inflow_var].mean()
@@ -43,15 +42,27 @@ if check_password():
     # (ب) "إنشاء" (Create) "الخريطة" (Map) (متمركزة على العراق)
     m = folium.Map(location=[33.2232, 43.6793], zoom_start=6)
 
-    # (ج) "إضافة" (Add) "العلامات" (Markers)
+    # --- "الإضافة" (ADDITION) V10.35 ---
+    # (1) "إضافة" (Add) "حدود" (Borders) "العراق" (Iraq) (المحافظات) "باللون" (In color) "الأسود" (Black)
+    try:
+        borders_url = "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IRQ/ADM1/geoBoundaries-IRQ-ADM1.geojson"
+        folium.GeoJson(
+            borders_url,
+            name="Iraq Borders",
+            style_function=lambda x: {'color': '#000000', 'weight': 2, 'fillOpacity': 0.0}
+        ).add_to(m)
+    except Exception as e:
+        st.warning(f"لم " + "نتمكن" + " " + "من" + " " + "تحميل" + " " + "طبقة" + " " + "الحدود" + ". " + "الخطأ" + ": {e}")
+    # --- "نهاية" (End) "الإضافة" (Addition) ---
+
+
+    # (ج) "إضافة" (Add) "العلامات" (Markers) (مع "الأيقونات" (Icons) "الجديدة" (New))
     for dam_name, (lat, lon) in dam_locations.items():
 
-        # "الحصول" (Get) على "الإحصائيات" (Stats)
         stats = avg_stats.get(dam_name)
         if not stats:
             continue
 
-        # "إنشاء" (Create) "النص" (Text) "المنبثق" (Popup) (HTML)
         popup_html = f"""
         <b>{dam_name}</b><br>
         <hr>
@@ -61,19 +72,27 @@ if check_password():
         if stats['inflow_var']:
              popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
 
-        # "إضافة" (Add) "العلامة" (Marker) (بالأيقونة "الافتراضية" (Default) "الحالية" (Current))
+        # --- "التعديل" (EDIT) V10.35 (تغيير "الأيقونات" (Icons)) ---
+        icon_name = 'tint' # "الافتراضي" (Default) "هو" (Is) "قطرة ماء" (Water drop) (fa-tint)
+        icon_color = 'blue'
+
+        if dam_name == 'منخفض الثرثار (Tharthar)':
+            icon_name = 'database' # "أيقونة" (Icon) "الخزان" (Reservoir) (fa-database)
+            icon_color = 'green'
+
         folium.Marker(
             location=[lat, lon],
             popup=folium.Popup(popup_html, max_width=300),
             tooltip=dam_name,
-            icon=folium.Icon(color='blue', icon='info-sign') # (هذه "الأيقونة" (Icon) "التي" (That) "سنغيرها" (Change) "لاحقاً" (Later))
+            icon=folium.Icon(color=icon_color, icon=icon_name, prefix='fa') # "استخدام" (Use) Font Awesome (fa)
         ).add_to(m)
+        # --- "نهاية" (End) "التعديل" (Edit) ---
 
     # (د) "عرض" (Render) "الخريطة" (Map) في "ستريملت" (Streamlit)
     st_folium(m, width='100%', height=600)
 
     # (هـ) "الشعار" (Logo) (في "الأسفل" (Bottom))
     try:
-        st.image("../logo.jpg", width=200) # (ملاحظة: المسار `../` "ضروري" (Necessary))
+        st.image("../logo.jpg", width=200) 
     except Exception as e:
         st.warning("لم يتم العثور على الشعار (logo.jpg)")
