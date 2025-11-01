@@ -186,10 +186,11 @@ if check_password():
     }
     kpi_df = pd.DataFrame(kpi_data)
 
-# "الإصلاح" (FIX) V10.28: "تحويل" (Convert) "عمود" (Column) "القيمة" (Value) "إلى" (To) "نص" (String) "لتجنب" (Avoid) "خطأ" (Error) Arrow
+# "الإصلاح" (FIX) V10.29: "تحويل" (Convert) "عمود" (Column) "القيمة" (Value) "إلى" (To) "نص" (String) "لتجنب" (Avoid) "خطأ" (Error) Arrow
 kpi_df['القيمة'] = kpi_df['القيمة'].astype(str) 
 
-st.dataframe(kpi_df, width='stretch', hide_index=True) # "إصلاح" (Fix) "التحذير" (Warning) "أيضاً" (Also)
+st.dataframe(kpi_df, width='stretch', hide_index=True) # "إصلاح" (Fix) "التحذير" (Warning) "أيضاً" (Also) 
+
 
     # --- 7. الخلاصة والتوصيات ---
     st.header("7. الخلاصة والتوصيات (Conclusion & Recommendation)")
