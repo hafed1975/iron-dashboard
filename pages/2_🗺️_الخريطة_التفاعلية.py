@@ -35,7 +35,7 @@ if check_password():
             "release_var": release_var,
             "avg_release": avg_release,
             "inflow_var": inflow_var,
-            "avg_inflow": avg_inflow # "الاسم" (Name) "الصحيح" (Correct) "هو" (Is) `avg_inflow`
+            "avg_inflow": avg_inflow # "الاسم" (Name) "الصحيح" (Correct)
         }
 
     # (ب) "إنشاء" (Create) "الخريطة" (Map) (متمركزة على العراق)
@@ -52,16 +52,18 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # (د) "إضافة" (Add) "الأنهار" (Rivers)
+    # --- "التعديل" (EDIT) V10.45 (استخدام "رابط" (Link) "أنهار" (Rivers) "موثوق" (Trusted)) ---
     try:
-        rivers_url = "https://gist.githubusercontent.com/Dans-Log/9536340/raw/81b2f0036ac76395b0b6c62b489e37fa86747b63/Iraq%2520Major%2520Rivers.geojson"
+        # "هذا" (This) "هو" (Is) "ملف" (File) "Natural Earth" "العالمي" (Global) "الموثوق" (Trusted).
+        rivers_url = "https://github.com/martynafford/natural-earth-geojson/raw/master/110m/physical/ne_110m_rivers_lake_centerlines.geojson"
         folium.GeoJson(
             rivers_url,
             name="Rivers",
-            style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} 
+            style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} # "اللون" (Color) "الأزرق" (Blue) "وسمك" (Thickness) 2
         ).add_to(m)
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الأنهار. الخطأ: {e}")
+    # --- "نهاية" (End) "التعديل" (Edit) ---
 
     # (هـ) "إضافة" (Add) "العلامات" (Markers)
     try:
@@ -87,11 +89,8 @@ if check_password():
         <b>متوسط الإطلاق ({stats['release_var']}):</b> {stats['avg_release']:.2f} BCM<br>
         """
 
-        # --- "الإصلاح" (FIX) V10.44 ---
         if stats['inflow_var']:
-             # "تم" (Done) "تغيير" (Changing) `avg_info` "إلى" (To) `avg_inflow`
              popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
-        # --- "نهاية" (End) "الإصلاح" (Fix) ---
 
         if icon:
             folium.Marker(
