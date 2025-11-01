@@ -1,0 +1,15 @@
+{
+    "created": "2015-11-18T09:05:43.666978",
+    "description": "",
+    "format": "SHP",
+    "download_url": "https://data.humdata.org/dataset/9f04c93c-6696-45ef-bc12-b747daa1b4a5/resource/d5c07f5a-36ad-4ab3-a247-f246e1db1625/download/river_line.zip",
+    "id": "d5c07f5a-36ad-4ab3-a247-f246e1db1625",
+    "last_modified": "2018-08-15T15:06:01.609133",
+    "metadata_modified": "2022-10-17T17:36:48.636624",
+    "microdata": false,
+    "dataset_id": "9f04c93c-6696-45ef-bc12-b747daa1b4a5",
+    "resource_type": "file.upload",
+    "name": "river_line.zip",
+    "mimetype": null,
+    "size": "31.4M"
+}
