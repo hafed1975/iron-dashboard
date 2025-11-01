@@ -52,10 +52,11 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # --- "التعديل" (EDIT) V10.45 (استخدام "رابط" (Link) "أنهار" (Rivers) "موثوق" (Trusted)) ---
+    # --- "التعديل" (EDIT) V10.47 (استخدام "روابط" (Links) "جديدة" (New) "وآمنة" (Safe)) ---
+
+    # (1) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (Link) "جديد" (New) "غير تالف" (Not corrupted))
     try:
-        # "هذا" (This) "هو" (Is) "ملف" (File) "Natural Earth" "العالمي" (Global) "الموثوق" (Trusted).
-        rivers_url = "https://github.com/martynafford/natural-earth-geojson/raw/master/110m/physical/ne_110m_rivers_lake_centerlines.geojson"
+        rivers_url = "https://gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/iraq_rivers_cleaned.geojson"
         folium.GeoJson(
             rivers_url,
             name="Rivers",
@@ -63,11 +64,10 @@ if check_password():
         ).add_to(m)
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الأنهار. الخطأ: {e}")
-    # --- "نهاية" (End) "التعديل" (Edit) ---
 
-    # (هـ) "إضافة" (Add) "العلامات" (Markers)
+    # (2) "إضافة" (Add) "الأيقونات" (Icons) (من "رابط" (Link) "الأيقونة" (Icon) "الزرقاء" (Blue) "الجديدة" (New))
     try:
-        icon_url = "https://raw.githubusercontent.com/Gemini-Helper-Account/IRON-Files/main/dam_icon.png"
+        icon_url = "https://gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/dam_icon_blue.png"
         icon = folium.CustomIcon(
             icon_url,
             icon_size=(30, 30) 
@@ -75,6 +75,7 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل أيقونة السد. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
         icon = None 
+    # --- "نهاية" (End) "التعديل" (Edit) ---
 
     for dam_name, (lat, lon) in dam_locations.items():
 
@@ -93,6 +94,7 @@ if check_password():
              popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
 
         if icon:
+            # "تطبيق" (Apply) "الأيقونة" (Icon) "الجديدة" (New)
             folium.Marker(
                 location=[lat, lon],
                 popup=folium.Popup(popup_html, max_width=300),
@@ -100,6 +102,7 @@ if check_password():
                 icon=icon 
             ).add_to(m)
         else:
+            # "الخطة" (Plan) "الاحتياطية" (Backup)
             folium.CircleMarker(
                 location=[lat, lon],
                 radius=8, 
