@@ -27,14 +27,14 @@ dam_variable_mapping = {
     'سد دربندخان (Darban)': ('S_Darban_End', 'X3_R_Darban', 'I_Darban'),
     'سد العظيم (Adhaim)': ('S_Adhaim_End', 'X4_R_Adhaim', 'I_Adhaim'),
     'سد حديثة (Haditha)': ('S_Haditha_End', 'X5_R_Haditha', 'I_Haditha'),
-    'سد حمرين (Hamrin)': ('S_Hamrin_End', 'X6_R_Hamrin', None), # (حمرين ليس له وارد خاص)
-    'منخفض الثرثار (Tharthar)': ('S_Thar_End', 'X9_R_Thar_Tigris', None) # (الثرثار ليس له وارد طبيعي)
+    'سد حمرين (Hamrin)': ('S_Hamrin_End', 'X6_R_Hamrin', None), 
+    'منخفض الثرثار (Tharthar)': ('S_Thar_End', 'X9_R_Thar_Tigris', None) 
 }
 
 # ----------------------------------------------------------------------
 # "الخطوة 2: "العقل" (I.R.O.N)
 # ----------------------------------------------------------------------
-@st.cache_data # (يتم تشغيل هذا مرة واحدة فقط)
+@st.cache_data 
 def run_iron_model():
     print("--- [IRON_V10] بدء " + "تشغيل المحرك" + " (يحدث مرة واحدة فقط)... ---")
 
@@ -160,8 +160,7 @@ def run_iron_model():
     total_shortage_euphrates = df['Shortage_Euphrates'].sum()
     total_months_with_shortage = len(df[(df['Shortage_Baghdad'] > 0.01) | (df['Shortage_Euphrates'] > 0.01)])
 
-    # --- "الإصلاح" (FIX) V10.33 ---
-    # "استخدام" (Use) "أسماء" (Names) "مفاتيح" (Keys) "إنجليزية" (English) "آمنة" (Safe) "لا" (Does not) "تحتوي" (Contain) "على" (On) "%"
+    # --- "الإصلاح" (FIX) V10.48 (استخدام "أسماء" (Names) "آمنة" (Safe)) ---
     kpis = {
         "shortage_bag": total_shortage_baghdad,
         "shortage_euph": total_shortage_euphrates,
@@ -169,5 +168,4 @@ def run_iron_model():
     }
     # --- "نهاية" (End) "الإصلاح" (Fix) ---
 
-    # (ج) "إرجاع" (Return) "النتائج" (Results)
     return df, kpis
