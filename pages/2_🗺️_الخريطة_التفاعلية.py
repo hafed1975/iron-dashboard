@@ -52,30 +52,29 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # --- "التعديل" (EDIT) V10.53 ---
+    # --- "التعديل" (EDIT) V10.58 (إصلاح "المسار" (Path) "المحلي" (Local)) ---
 
-    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (link) "خارجي" (external) "موثوق" (trusted))
+    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "ملفك" (your file) "المحلي" (local))
     try:
-        # "هذا" (This) "هو" (is) "الرابط" (the link) "الصحيح" (correct) "والنظيف" (and clean) "للأنهار" (for the rivers)
-        rivers_url = "https://gist.githubusercontent.com/Dans-Log/9536340/raw/81b2f0036ac76395b0b6c62b489e37fa86747b63/Iraq%2520Major%2520Rivers.geojson"
+        # "أضفنا" (We added) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages`
         folium.GeoJson(
-            rivers_url,
+            '../rivers_iraq.geojson', # "المسار" (Path) "الصحيح" (Correct)
             name="Rivers",
             style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} 
         ).add_to(m)
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل طبقة الأنهار. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل '../rivers_iraq.geojson'. الخطأ: {e}")
 
-    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local) "الذي" (that) "رفعته" (you uploaded))
+    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local))
     try:
-        # "هنا" (Here) "نحن" (we) "نستدعي" (call) "الأيقونة" (the icon) `images.png` "التي" (that) "رفعتها" (you uploaded) "أنت" (you)
-        icon_path = 'images.png' 
+        # "أضفنا" (We added) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages`
+        icon_path = '../images.png' # "المسار" (Path) "الصحيح" (Correct)
         icon = folium.CustomIcon(
             icon_path,
             icon_size=(30, 30) 
         )
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل 'images.png'. هل قمت برفعه إلى GitHub؟ سنستخدم الدائرة الافتراضية. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل '../images.png'. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
         icon = None 
     # --- "نهاية" (End) "التعديل" (Edit) ---
 
@@ -120,6 +119,7 @@ if check_password():
 
     # (ز) "الشعار" (Logo) (في "أسفل" (Bottom))
     try:
+        # "المسار" (The path) "هنا" (here) "صحيح" (is correct) "بالفعل" (already) (`../logo.jpg`)
         st.image("../logo.jpg", width=200) 
     except Exception as e:
         st.warning("لم يتم العثور على الشعار (logo.jpg)")
