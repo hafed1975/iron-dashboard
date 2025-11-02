@@ -1,4 +1,29 @@
 import streamlit as st
+
+# --- (إضافة "التنسيق" (CSS) "العربي" (Arabic) V10.73 "لهذه" (for this) "الصفحة" (page) "فقط" (only)) ---
+rtl_css = """
+<style>
+    /* Force RTL for this page's main content */
+    [data-testid="stAppViewContainer"] {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+
+    /* Force sidebar to also be RTL (optional, but recommended for consistency) */
+    [data-testid="stSidebar"] {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+</style>
+"""
+st.markdown(rtl_css, unsafe_allow_html=True)
+# --- (نهاية "الإضافة" (Addition)) ---
+
+# "تأكد" (Make sure) "من" (from) "أن" (that) "بقية" (the rest of) "الكود" (the code) "الخاص" (special) "بك" (your) "موجود" (is present) "هنا" (here) "بالأسفل" (below)
+# ...
+# ... (الكود" (Code) "القديم" (Old) "الخاص" (Special) "بك" (your) "للمقدمة" (Introduction)) ...
+# ...
+import streamlit as st
 from password_check import check_password # "استيراد" (Import) "الدالة" (Function)
 import pandas as pd # "مهم" (Important) "للجدول" (Table)
 
