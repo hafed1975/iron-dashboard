@@ -52,29 +52,29 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # --- "التعديل" (EDIT) V10.60 (استخدام "المسارات" (Paths) "المحلية" (Local) "الصحيحة" (Correct)) ---
+    # --- "التعديل" (EDIT) V10.61 (إزالة "الـ" (the) `../`) ---
 
     # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "ملفك" (your file) "المحلي" (local))
     try:
-        # "استخدام" (Use) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages`
+        # "قراءة" (Read) "مباشرة" (directly) "من" (from) "الجذر" (the root) (بدون `../`)
         folium.GeoJson(
-            '../rivers_iraq.geojson', # "المسار" (Path) "الصحيح" (Correct)
+            'rivers_iraq.geojson', # "المسار" (Path) "الصحيح" (Correct)
             name="Rivers",
             style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} 
         ).add_to(m)
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل '../rivers_iraq.geojson'. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل 'rivers_iraq.geojson'. الخطأ: {e}")
 
     # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local))
     try:
-        # "استخدام" (Use) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages`
-        icon_path = '../images.png' # "المسار" (Path) "الصحيح" (Correct)
+        # "قراءة" (Read) "مباشرة" (directly) "من" (from) "الجذر" (the root) (بدون `../`)
+        icon_path = 'images.png' # "المسار" (Path) "الصحيح" (Correct)
         icon = folium.CustomIcon(
             icon_path,
             icon_size=(30, 30) 
         )
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل '../images.png'. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل 'images.png'. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
         icon = None 
     # --- "نهاية" (End) "التعديل" (Edit) ---
 
@@ -119,6 +119,7 @@ if check_password():
 
     # (ز) "الشعار" (Logo) (في "أسفل" (Bottom))
     try:
-        st.image("../logo.jpg", width=200) 
+        # "يجب" (Must) "علينا" (us) "إزالة" (to remove) `../` "من" (from) "هنا" (here) "أيضاً" (also)!
+        st.image("logo.jpg", width=200) 
     except Exception as e:
         st.warning("لم يتم العثور على الشعار (logo.jpg)")
