@@ -164,7 +164,7 @@ if check_password():
     st.write("""
     "التحليل" (Analysis) "في" (In) "صفحة" (Page) "لوحة التحكم" (Dashboard) "يثبت" (Proves) "نجاح" (Success) "النموذج" (Model) "في" (In) "إدارة" (Managing) "الفيضانات" (Floods) "العشوائية" (Random) "دون" (Without) "تجاوز" (Exceeding) "الحد" (Limit) "الحرج" (Critical) "لبغداد" (Baghdad).
     """)
-    st.info("IRON_V7_Plot_1_Baghdad_Flow.png")
+    st.image("IRON_V7_Plot_1_Baghdad_Flow.png")
     # st.image("IRON_V7_Plot_1_Baghdad_Flow.png") # (ملف الصورة غير موجود حالياً)
 
     st.subheader("5.2. النتيجة الثانية: المرونة في إدارة الجفاف")
