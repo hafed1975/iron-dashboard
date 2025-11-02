@@ -52,24 +52,22 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # --- "التعديل" (EDIT) V10.67 (استخدام "رابط" (link) "أنهار" (rivers) "عالمي" (global) "صحيح" (correct)) ---
+    # --- "التعديل" (EDIT) V10.68 (استخدام "المسارات" (Paths) "المحلية" (Local) `../`) ---
 
-    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (link) "خارجي" (external) "موثوق" (trusted))
+    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "ملفك" (your file) "المحلي" (local))
     try:
-        # "هذا" (This) "ملف" (is a file) "عالمي" (global) "موثوق" (trusted) "يستخدم" (that uses) "الإحداثيات" (coordinates) "الصحيحة" (correct)
-        # "قد" (It may) "يكون" (be) "بطيئاً" (slow) "في" (in) "التحميل" (loading) "لأنه" (because it is) "كبير" (large) (23MB)
-        rivers_url = "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/ne_10m_rivers_lake_centerlines.geojson"
+        # "استخدام" (Use) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages` "والعثور" (and find) "على" (on) "الملف" (file) "في" (in) "الجذر" (the root)
         folium.GeoJson(
-            rivers_url,
+            '../rivers_iraq.geojson', # "المسار" (Path) "الصحيح" (Correct)
             name="Rivers",
             style_function=lambda x: {'color': '#007BFF', 'weight': 1.5} # "أزرق" (Blue) "و" (and) "أقل" (less) "سماكة" (thick)
         ).add_to(m)
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل طبقة الأنهار العالمية. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل '../rivers_iraq.geojson'. الخطأ: {e}")
 
-    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local) "الناجح" (successful))
+    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local))
     try:
-        # "سنحتفظ" (We will keep) "بالطريقة" (the method) "المحلية" (local) "الناجحة" (successful) "للأيقونات" (for the icons)
+        # "استخدام" (Use) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages` "والعثور" (and find) "على" (on) "الملف" (file) "في" (in) "الجذر" (the root)
         icon_path = '../images.png' # "المسار" (Path) "الصحيح" (Correct)
         icon = folium.CustomIcon(
             icon_path,
