@@ -41,7 +41,7 @@ if check_password():
     # (ب) "إنشاء" (Create) "الخريطة" (Map) (متمركزة على العراق)
     m = folium.Map(location=[33.2232, 43.6793], zoom_start=6)
 
-    # (ج) "إضافة" (Add) "حدود" (Borders) "العراق" (Iraq)
+    # (ج) "إضافة" (Add) "حدود" (Borders) "العراق" (Iraq) (هذا "يعمل" (works) "بشكل جيد" (well))
     try:
         borders_url = "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IRQ/ADM1/geoBoundaries-IRQ-ADM1.geojson"
         folium.GeoJson(
@@ -52,27 +52,31 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (Link) "جديد" (New) "نظيف" (Clean))
+    # --- "التعديل" (EDIT) V10.60 (استخدام "المسارات" (Paths) "المحلية" (Local) "الصحيحة" (Correct)) ---
+
+    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "ملفك" (your file) "المحلي" (local))
     try:
-        rivers_url = "https.gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/iraq_rivers_cleaned.geojson"
+        # "استخدام" (Use) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages`
         folium.GeoJson(
-            rivers_url,
+            '../rivers_iraq.geojson', # "المسار" (Path) "الصحيح" (Correct)
             name="Rivers",
             style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} 
         ).add_to(m)
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل طبقة الأنهار. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل '../rivers_iraq.geojson'. الخطأ: {e}")
 
-    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "رابط" (Link) "أيقونة" (Icon) "نظيف" (Clean))
+    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local))
     try:
-        icon_url = "https.gist.githubusercontent.com/Gemini-Helper-Account/f83713076b10d321151614f1074a8f9a/raw/dam_icon_blue.png"
+        # "استخدام" (Use) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages`
+        icon_path = '../images.png' # "المسار" (Path) "الصحيح" (Correct)
         icon = folium.CustomIcon(
-            icon_url,
+            icon_path,
             icon_size=(30, 30) 
         )
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل أيقونة السد. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل '../images.png'. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
         icon = None 
+    # --- "نهاية" (End) "التعديل" (Edit) ---
 
     for dam_name, (lat, lon) in dam_locations.items():
 
@@ -87,20 +91,18 @@ if check_password():
         <b>متوسط الإطلاق ({stats['release_var']}):</b> {stats['avg_release']:.2f} BCM<br>
         """
 
-        # --- "الإصلاح" (FIX) V10.48 (إصلاح "الخطأ الإملائي" (Typo)) ---
         if stats['inflow_var']:
-             # "استخدام" (Use) `avg_inflow` "بدلاً من" (Instead of) `avg_info`
              popup_html += f"<b>متوسط الوارد ({stats['inflow_var']}):</b> {stats['avg_inflow']:.2f} BCM"
-        # --- "نهاية" (End) "الإصلاح" (Fix) ---
 
         if icon:
             folium.Marker(
                 location=[lat, lon],
                 popup=folium.Popup(popup_html, max_width=300),
                 tooltip=dam_name,
-                icon=icon 
+                icon=icon # "تطبيق" (Apply) "الأيقونة" (the icon) "الخاصة" (special) "بك" (your)
             ).add_to(m)
         else:
+            # "الخطة" (Plan) "الاحتياطية" (Backup)
             folium.CircleMarker(
                 location=[lat, lon],
                 radius=8, 
