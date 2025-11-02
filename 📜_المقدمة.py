@@ -171,14 +171,14 @@ if check_password():
     st.write("""
     "الرسم البياني" (Plot) "للعجز" (Deficit) "يثبت" (Proves) "ذكاء" (Intelligence) "النموذج" (Model). "العجز" (Deficit) "لا" (Does not) "يظهر" (Appear) "إلا" (Except) "عندما" (When) "تكون" (Are) "الواردات" (Inflows) "في" (In) "أدنى" (Lowest) "مستوياتها" (Levels) (في "سنوات" (Years) "الجفاف" (Drought) "القاسية" (Severe)).
     """)
-    st.info("ملاحظة: (الرجاء إدراج ملف IRON_V7_Plot_2_Deficit_vs_Stress.png هنا)")
+    st.image("IRON_V7_Plot_2_Deficit_vs_Stress.png)")
     # st.image("IRON_V7_Plot_2_Deficit_vs_Stress.png") # (ملف الصورة غير موجود حالياً)
 
     st.subheader("5.3. النتيجة الثالثة: سياسة تقليل التبخر (الخزن الذكي)")
     st.write("""
     "الرسوم البيانية" (Plots) "للخزن" (Storage) "توضح" (Illustrate) "كيف" (How) "قرر" (Decided) "العقل" (I.R.O.N) "تخزين" (Store) "المياه" (Water) "ليقلل" (Reduce) "التبخر" (Evaporation) (عن "طريق" (Way) "تفضيل" (Preferring) "الخزانات" (Reservoirs) "العميقة" (Deep) "على" (Over) "الضحلة" (Shallow)).
     """)
-    st.info("ملاحظة: (الرجاء إدج ملف IRON_V7_Plot_3_Storage_Policy.png هنا)")
+    st.image("IRON_V7_Plot_3_Storage_Policy.png)")
     # st.image("IRON_V7_Plot_3_Storage_Policy.png") # (ملف الصورة غير موجود حالياً)
 
     # --- 6. ملخص النتائج ---
