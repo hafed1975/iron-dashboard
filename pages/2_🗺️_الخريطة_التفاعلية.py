@@ -35,7 +35,7 @@ if check_password():
             "release_var": release_var,
             "avg_release": avg_release,
             "inflow_var": inflow_var,
-            "avg_inflow": avg_inflow # "الاسم" (Name) "الصحيح" (Correct)
+            "avg_inflow": avg_inflow 
         }
 
     # (ب) "إنشاء" (Create) "الخريطة" (Map) (متمركزة على العراق)
@@ -52,29 +52,21 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # --- "التعديل" (EDIT) V10.68 (استخدام "المسارات" (Paths) "المحلية" (Local) `../`) ---
+    # --- "التعديل" (EDIT) V10.69 (إزالة "الأنهار" (Rivers) "وإصلاح" (Fix) "مسار" (Path) "الأيقونة" (Icon)) ---
 
-    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "ملفك" (your file) "المحلي" (local))
-    try:
-        # "استخدام" (Use) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages` "والعثور" (and find) "على" (on) "الملف" (file) "في" (in) "الجذر" (the root)
-        folium.GeoJson(
-            '../rivers_iraq.geojson', # "المسار" (Path) "الصحيح" (Correct)
-            name="Rivers",
-            style_function=lambda x: {'color': '#007BFF', 'weight': 1.5} # "أزرق" (Blue) "و" (and) "أقل" (less) "سماكة" (thick)
-        ).add_to(m)
-    except Exception as e:
-        st.warning(f"لم نتمكن من تحميل '../rivers_iraq.geojson'. الخطأ: {e}")
+    # (د) "تم" (Done) "حذف" (delete) "كود" (code) "الأنهار" (rivers) "الفاشل" (failed) "من" (from) "هنا" (here)
 
     # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local))
     try:
-        # "استخدام" (Use) `../` "للخروج" (to step out) "من" (from) "مجلد" (folder) `pages` "والعثور" (and find) "على" (on) "الملف" (file) "في" (in) "الجذر" (the root)
-        icon_path = '../images.png' # "المسار" (Path) "الصحيح" (Correct)
+        # "هذا" (This) "هو" (is) "المسار" (the path) "الصحيح" (correct) (بدون `../`) "الذي" (that) "نجح" (worked) "سابقاً" (previously)
+        icon_path = 'images.png' 
         icon = folium.CustomIcon(
             icon_path,
             icon_size=(30, 30) 
         )
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل '../images.png'. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
+        # "إذا" (If) "فشل" (it fails)، "سنستخدم" (we will use) "الدائرة" (the circle) "الاحتياطية" (backup)
+        st.warning(f"لم نتمكن من تحميل 'images.png'. هل قمت برفعه إلى GitHub؟")
         icon = None 
     # --- "نهاية" (End) "التعديل" (Edit) ---
 
@@ -102,7 +94,6 @@ if check_password():
                 icon=icon # "تطبيق" (Apply) "الأيقونة" (the icon) "الخاصة" (special) "بك" (your)
             ).add_to(m)
         else:
-            # "الخطة" (Plan) "الاحتياطية" (Backup)
             folium.CircleMarker(
                 location=[lat, lon],
                 radius=8, 
@@ -119,6 +110,7 @@ if check_password():
 
     # (ز) "الشعار" (Logo) (في "أسفل" (Bottom))
     try:
-        st.image("../logo.jpg", width=200) 
+        # "إصلاح" (Fix) "المسار" (the path) "هنا" (here) "أيضاً" (also) (إزالة `../`)
+        st.image("logo.jpg", width=200) 
     except Exception as e:
         st.warning("لم يتم العثور على الشعار (logo.jpg)")
