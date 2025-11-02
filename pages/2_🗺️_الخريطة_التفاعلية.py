@@ -52,29 +52,31 @@ if check_password():
     except Exception as e:
         st.warning(f"لم نتمكن من تحميل طبقة الحدود. الخطأ: {e}")
 
-    # --- "التعديل" (EDIT) V10.61 (إزالة "الـ" (the) `../`) ---
+    # --- "التعديل" (EDIT) V10.67 (استخدام "رابط" (link) "أنهار" (rivers) "عالمي" (global) "صحيح" (correct)) ---
 
-    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "ملفك" (your file) "المحلي" (local))
+    # (د) "إضافة" (Add) "الأنهار" (Rivers) (من "رابط" (link) "خارجي" (external) "موثوق" (trusted))
     try:
-        # "قراءة" (Read) "مباشرة" (directly) "من" (from) "الجذر" (the root) (بدون `../`)
+        # "هذا" (This) "ملف" (is a file) "عالمي" (global) "موثوق" (trusted) "يستخدم" (that uses) "الإحداثيات" (coordinates) "الصحيحة" (correct)
+        # "قد" (It may) "يكون" (be) "بطيئاً" (slow) "في" (in) "التحميل" (loading) "لأنه" (because it is) "كبير" (large) (23MB)
+        rivers_url = "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/ne_10m_rivers_lake_centerlines.geojson"
         folium.GeoJson(
-            'rivers_iraq.geojson', # "المسار" (Path) "الصحيح" (Correct)
+            rivers_url,
             name="Rivers",
-            style_function=lambda x: {'color': '#007BFF', 'weight': 2.0} 
+            style_function=lambda x: {'color': '#007BFF', 'weight': 1.5} # "أزرق" (Blue) "و" (and) "أقل" (less) "سماكة" (thick)
         ).add_to(m)
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل 'rivers_iraq.geojson'. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل طبقة الأنهار العالمية. الخطأ: {e}")
 
-    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local))
+    # (هـ) "إضافة" (Add) "العلامات" (Markers) (من "ملفك" (your file) "المحلي" (local) "الناجح" (successful))
     try:
-        # "قراءة" (Read) "مباشرة" (directly) "من" (from) "الجذر" (the root) (بدون `../`)
-        icon_path = 'images.png' # "المسار" (Path) "الصحيح" (Correct)
+        # "سنحتفظ" (We will keep) "بالطريقة" (the method) "المحلية" (local) "الناجحة" (successful) "للأيقونات" (for the icons)
+        icon_path = '../images.png' # "المسار" (Path) "الصحيح" (Correct)
         icon = folium.CustomIcon(
             icon_path,
             icon_size=(30, 30) 
         )
     except Exception as e:
-        st.warning(f"لم نتمكن من تحميل 'images.png'. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
+        st.warning(f"لم نتمكن من تحميل '../images.png'. سنستخدم الدائرة الافتراضية. الخطأ: {e}")
         icon = None 
     # --- "نهاية" (End) "التعديل" (Edit) ---
 
@@ -119,7 +121,6 @@ if check_password():
 
     # (ز) "الشعار" (Logo) (في "أسفل" (Bottom))
     try:
-        # "يجب" (Must) "علينا" (us) "إزالة" (to remove) `../` "من" (from) "هنا" (here) "أيضاً" (also)!
-        st.image("logo.jpg", width=200) 
+        st.image("../logo.jpg", width=200) 
     except Exception as e:
         st.warning("لم يتم العثور على الشعار (logo.jpg)")
